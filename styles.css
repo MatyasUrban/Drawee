@@ -10,6 +10,7 @@ body {
     display: flex;
     flex-direction: column;
     background: #EEEEEE;
+    overflow-x: hidden;
 }
 
 header {
@@ -37,6 +38,84 @@ nav {
     justify-content: center;
     margin: 15px;
     border: none;
+}
+
+.tool-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper{
+    display: inline-flex;
+    background: #fff;
+    height: 80px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 5px;
+    padding: 20px 15px;
+    margin: 20px;
+    box-shadow: 5px 5px 30px rgba(0,0,0,0.2);
+}
+.wrapper .option{
+    background: #fff;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0 10px;
+    border: 2px solid lightgrey;
+    transition: all 0.3s ease;
+}
+.wrapper .option .dot{
+    height: 20px;
+    width: 20px;
+    background: #d9d9d9;
+    border-radius: 50%;
+    position: relative;
+}
+.wrapper .option .dot::before{
+    position: absolute;
+    content: "";
+    top: 4px;
+    left: 4px;
+    width: 12px;
+    height: 12px;
+    background: #0069d9;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(1.5);
+    transition: all 0.3s ease;
+}
+input[type="radio"]{
+    display: none;
+}
+#brush:checked:checked ~ .brush,
+#eraser:checked:checked ~ .eraser{
+    border-color: #0069d9;
+    background: #0069d9;
+}
+#brush:checked:checked ~ .brush .dot,
+#eraser:checked:checked ~ .eraser .dot{
+    background: #fff;
+}
+#brush:checked:checked ~ .brush .dot::before,
+#eraser:checked:checked ~ .eraser .dot::before{
+    opacity: 1;
+    transform: scale(1);
+}
+.wrapper .option span{
+    font-size: 20px;
+    color: #808080;
+}
+#brush:checked:checked ~ .brush span,
+#eraser:checked:checked ~ .eraser span{
+    color: #fff;
 }
 
 input[type='submit']{
@@ -185,8 +264,8 @@ select{
 
 .toast{
     position: absolute;
-    top: 25px;
-    right: 30px;
+    top: 15px;
+    right: 15px;
     border-radius: 12px;
     background: #fff;
     padding: 10px 25px 10px 15px;
@@ -195,6 +274,7 @@ select{
     overflow: hidden;
     transform: translateX(calc(100% + 30px));
     transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
+    z-index: 200;
 }
 
 .toast.active{
@@ -291,6 +371,47 @@ select{
     }
 }
 
+
+
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #777676;
+    padding: 30px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.overlay iframe {
+    width: 320px;
+    height: 180px;
+}
+
+.close-video {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+}
+
+
 @media (min-width: 720px) {
 
     .drawing-board-container {
@@ -309,41 +430,12 @@ select{
         top: -115px;
         left: 25px;
     }
+
+    .overlay iframe {
+        height: 450px;
+        width: 800px;
+    }
 }
-
-
-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #777676;
-    padding: 30px;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-}
-
-.close-video {
-    position: absolute;
-    top: 0;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: white;
-}
-
 
 .hidden {
     display: none;

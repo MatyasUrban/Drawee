@@ -17,6 +17,20 @@
     <button id="redo" class="round-button"><i class="fas fa-rotate-right"></i></button>
 </header>
 <main>
+    <div class="tool-selector">
+        <div class="wrapper">
+            <input type="radio" name="select" id="brush" checked>
+            <input type="radio" name="select" id="eraser">
+            <label for="brush" class="option brush">
+                <div class="dot"></div>
+                <span>Brush</span>
+            </label>
+            <label for="eraser" class="option eraser">
+                <div class="dot"></div>
+                <span>Eraser</span>
+            </label>
+        </div>
+    </div>
     <div class="upper-controls-section">
 
         <div id="show-video" class="top-control">
@@ -25,11 +39,11 @@
         <div id="width" class="top-control">
             <label for="stroke-width"></label>
             <select id="stroke-width">
-                <option value="1">1</option>
-                <option value="2" selected>2</option>
-                <option value="4">4</option>
-                <option value="8">8</option>
-                <option value="16">16</option>
+                <option value="1">1px</option>
+                <option value="2" selected>2px</option>
+                <option value="4">4px</option>
+                <option value="8">8px</option>
+                <option value="16">16px</option>
             </select>
         </div>
         <div></div>
@@ -42,11 +56,12 @@
         </div>
     </div>
     <div class="drawing-board-container">
-        <svg id="svg-board"></svg>
+        <svg id="svg-board" xmlns="http://www.w3.org/2000/svg"></svg>
         <audio id="scribbling-sound" src="media/scribbling.mp3" preload="auto" loop></audio>
         <audio id="erasing-sound" src="media/erasing.mp3" preload="auto" loop></audio>
         <button id="new" class="round-button"><i class="fas fa-hand-sparkles"></i></button>
     </div>
+
     <div class="bottom-controls-section">
         <div id="save" class="bottom-opener">
             <i class="fas fa-floppy-disk"></i>
@@ -69,26 +84,26 @@
         </form>
 
         <form class="bottom-form hidden" id="load-form">
-            <label for="saved-drawings-load-select">Select your save drawing</label>
+            <label for="saved-drawings-load-select">Select your drawing:</label>
             <select id="saved-drawings-load-select">
             </select>
             <input type="submit" value="Load drawing onto canvas">
         </form>
         <form class="bottom-form hidden" id="export-form">
-            <label for="quality-range-input">Pixel density (lowest to highest):</label>
-            <input type="range" id="quality-range-input" min="1" max="10" step="1">
+            <label for="quality-range-input">Sharpness (lowest to highest):</label>
+            <input type="range" id="quality-range-input" min="1" max="5" step="1">
             <label for="desired-background">Image background:</label>
             <select name="desired-background" id="desired-background" >
                 <option value="transparent" selected>Transparent</option>
                 <option value="white">White</option>
-                <option value="Black">Black</option>
+                <option value="black">Black</option>
             </select>
             <input type="submit" value="Download drawing as PNG">
         </form>
         <form class="bottom-form hidden" id="delete-form">
-            <label for="saved-drawings-delete-select">Select your save drawing</label>
+            <label for="saved-drawings-delete-select">Select your drawing:</label>
             <select id="saved-drawings-delete-select" name="saved-drawings-delete-select"></select>
-            <input type="submit" value="Delete drawing from storage">
+            <input type="submit" value="Delete drawing from local storage">
         </form>
     </div>
     <div class="toast">
@@ -105,7 +120,7 @@
     </div>
     <div id="video-overlay" class="overlay hidden">
         <button id="close-video" class="close-video">&times;</button>
-        <iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/TOZxfVp_fSc?enablejsapi=1" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/TOZxfVp_fSc" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
 </main>
 <footer>&copy; 2023 Matyas Urban</footer>
