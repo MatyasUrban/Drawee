@@ -74,6 +74,8 @@ export function showToast(isGood, headingText, messageText) {
     check.className = `icon check ${iconClass}`;
 
     // Display the toast
+    const topPosition = window.pageYOffset + 15;
+    toast.style.top = topPosition + 'px';
     toast.style.display = "block";
     toast.classList.add("active");
     progress.classList.add("active");

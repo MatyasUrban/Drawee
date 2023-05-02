@@ -63,7 +63,6 @@ window.onload = async () => {
     saveForm.addEventListener("submit", (event) => {
         event.preventDefault()
         let drawingName = document.getElementById('saving-name-input').value.trim()
-        window.scrollTo({top: 0, behavior: 'smooth'});
         saveDrawing(drawingName)
     })
     loadDiv.addEventListener("click", () => {
@@ -90,10 +89,8 @@ window.onload = async () => {
                 const svg = document.getElementById('svg-board')
                 svg.innerHTML = '';
                 loadNewHistoryStack(loadedHistoryStack);
-                window.scrollTo({top: 0, behavior: 'smooth'});
                 showToast(true, 'Drawing loaded', 'You can now proceed to editing')
             } else {
-                window.scrollTo({top: 0, behavior: 'smooth'});
                 showToast(false, 'Drawing not loaded', `Failed to load "${selectedDrawingName}".`)
                 alert(`Failed to load the drawing "${selectedDrawingName}".`)
             }
@@ -115,7 +112,6 @@ window.onload = async () => {
         const svgBoard = document.getElementById('svg-board')
         const pixelDensity = document.getElementById('quality-range-input').value;
         const background = document.getElementById('desired-background').value
-        window.scrollTo({top: 0, behavior: 'smooth'});
         exportSVGtoPNG(svgBoard, pixelDensity, background);
     });
     deleteDiv.addEventListener("click", () => {
@@ -132,7 +128,6 @@ window.onload = async () => {
     })
     deleteForm.addEventListener("submit", (event) => {
         event.preventDefault()
-        window.scrollTo({top: 0, behavior: 'smooth'});
         deleteDrawing(document.getElementById('saved-drawings-delete-select').value)
         populateSelectFromLocalStorage('saved-drawings-delete-select')
     })
