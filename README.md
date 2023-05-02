@@ -1,4 +1,4 @@
-# JavaScript Drawing Web App | Drawee
+# Single-Page JavaScript Application | Drawee
 
 This is my semester project in *Client Applications in JavaScript*  [B0B39KAJ](https://bilakniha.cvut.cz/cs/predmet3132206.html#gsc.tab=0) course as part of my Software Engineering undergraduate curriculum at the Czech Technical University in Prague, CZ, EU.
 
