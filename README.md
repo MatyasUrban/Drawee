@@ -2,7 +2,9 @@
 
 This is my semester project in *Client Applications in JavaScript*  [B0B39KAJ](https://bilakniha.cvut.cz/cs/predmet3132206.html#gsc.tab=0) course as part of my Software Engineering undergraduate curriculum at the Czech Technical University in Prague, CZ, EU.
 
-* You can view the live app here: [https://matyasurban.github.io/Drawee/](https://matyasurban.github.io/Drawee/)
+Designed, developed and programmed by  [Matyas Urban](https://www.linkedin.com/in/matyasurban/)  in Spring 2023.
+
+* **You can view the live app here:** [https://matyasurban.github.io/Drawee/](https://matyasurban.github.io/Drawee/)
 * _Note that the app asks for location permission and due to the static nature of the app, which runs just on the client (your device), it is safe to allow the location access._
 ![](readme-pictures/mockups.png)
 ## App Overview
