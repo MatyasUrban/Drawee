@@ -7,8 +7,21 @@ import {isInCzechia, translateToCzech} from "./script-modules/localize.js"
 
 
 window.onload = async () => {
+
     updateStrokePreview()
     initPointerEvents()
+    const svgBoard = document.getElementById('svg-board');
+    svgBoard.addEventListener('touchstart', (event) => {
+        event.preventDefault();
+    });
+
+    svgBoard.addEventListener('touchmove', (event) => {
+        event.preventDefault();
+    });
+
+    svgBoard.addEventListener('touchend', (event) => {
+        event.preventDefault();
+    });
     pushState(getCurrentState())
     document.getElementById('stroke-color').addEventListener('change', () => {
         updateStrokePreview()
@@ -16,7 +29,8 @@ window.onload = async () => {
     document.getElementById('stroke-width').addEventListener('change', () => {
         updateStrokePreview()
     });
-    document.getElementById('new').addEventListener('click', () => {
+    document.getElementById('new').addEventListener('click', (event) => {
+        event.preventDefault()
         const svg = document.getElementById('svg-board');
         svg.innerHTML = ''
         clearHistory()
@@ -122,7 +136,6 @@ window.onload = async () => {
             const videoOverlay = document.getElementById('video-overlay');
             videoOverlay.classList.remove('hidden');
             const video = document.getElementById('show-video');
-            video.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
         } else {
             showToast(false, "You're offline", "Restore your internet connection first")
         }
@@ -131,8 +144,6 @@ window.onload = async () => {
         const videoOverlay = document.getElementById('video-overlay');
         videoOverlay.classList.add('hidden');
         const video = document.getElementById('show-video');
-        video.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-
     });
 
     window.addEventListener('offline', () => {
@@ -140,7 +151,6 @@ window.onload = async () => {
         if (!videoOverlay.classList.contains('hidden')) {
             videoOverlay.classList.add('hidden');
             const video = document.getElementById('show-video');
-            video.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
             showToast(false, "You're offline", "Restore your internet connection first")
         }
     });

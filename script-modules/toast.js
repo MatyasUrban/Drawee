@@ -25,10 +25,12 @@ export function handleVisibilityChange() {
         timer1 = setTimeout(() => {
             const toast = document.querySelector(".toast");
             toast.classList.remove("active");
+            toast.style.display = "none"; // Hide the toast
         }, remainingTime1);
 
         timer2 = setTimeout(() => {
             progress.classList.remove("active");
+            toast.style.display = "none"; // Hide the toast
         }, remainingTime2);
 
         // Resume the progress bar animation
@@ -72,6 +74,7 @@ export function showToast(isGood, headingText, messageText) {
     check.className = `icon check ${iconClass}`;
 
     // Display the toast
+    toast.style.display = "block";
     toast.classList.add("active");
     progress.classList.add("active");
 
@@ -98,6 +101,7 @@ export function showToast(isGood, headingText, messageText) {
         toast.classList.remove("active");
         setTimeout(() => {
             progress.classList.remove("active");
+            toast.style.display = "none"; // Hide the toast
         }, 300);
         clearTimeout(timer1);
         clearTimeout(timer2);

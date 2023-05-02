@@ -6,11 +6,14 @@
     font-family: 'Poppins', sans-serif;
 }
 
+html, body {
+    overflow-x: hidden;
+}
+
 body {
     display: flex;
     flex-direction: column;
     background: #EEEEEE;
-    overflow-x: hidden;
 }
 
 header {
@@ -263,6 +266,7 @@ select{
 }
 
 .toast{
+    display: none;
     position: absolute;
     top: 15px;
     right: 15px;

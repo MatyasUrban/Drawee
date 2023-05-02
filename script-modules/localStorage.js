@@ -7,8 +7,17 @@ export function saveDrawing(drawingName) {
 }
 
 export function deleteDrawing(drawingName) {
-    localStorage.removeItem(drawingName)
-    showToast(true, 'Success', `Drawing "${drawingName}" deleted.`)
+    if (isKeyInLocalStorage(drawingName)){
+        localStorage.removeItem(drawingName)
+        showToast(true, 'Success', `Drawing "${drawingName}" deleted.`)
+    } else {
+        showToast(false, 'Failure', `There is no drawing named "${drawingName}".`)
+    }
+}
+
+function isKeyInLocalStorage(key) {
+    const value = localStorage.getItem(key);
+    return value !== null;
 }
 
 export function getDrawingKeys() {
