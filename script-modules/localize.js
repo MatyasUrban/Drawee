@@ -1,3 +1,12 @@
+/**
+ * Manages location based feature.
+ * @module localize
+ */
+
+/**
+ * Determines if the user is currently located in Czechia.
+ * @returns {Promise<boolean>} A promise that resolves to true if the user is in Czechia, and false otherwise.
+ */
 export async function isInCzechia() {
     try {
         const position = await new Promise((resolve, reject) => {
@@ -17,9 +26,12 @@ export async function isInCzechia() {
     }
 }
 
+/**
+ * Translates the text content of specific elements in the HTML document to the Czech language.
+ */
 export function translateToCzech() {
-    document.querySelector('label[for="brush"] span').innerHTML = 'Tužka'
-    document.querySelector('label[for="eraser"] span').innerHTML = 'Guma'
+    document.querySelector('label[for="brush"] span:nth-of-type(2)').innerHTML = 'Tužka'
+    document.querySelector('label[for="eraser"] span:nth-of-type(2)').innerHTML = 'Guma'
     document.querySelector('label[for="saving-name-input"]').innerHTML = 'Název kresby:'
     document.querySelector('#saving-name-input').placeholder = 'Napište název'
     document.querySelector('#save-form input[type="submit"]').value = 'Uložit kresbu do local storage'

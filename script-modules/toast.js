@@ -1,10 +1,23 @@
+/**
+ * Module for displaying toast messages with progress bars.
+ * @module toast
+ */
+
 let timer1, timer2, startTime, remainingTime1, remainingTime2;
 
+/**
+ * Updates the width of the progress bar in the toast message.
+ * @param {HTMLElement} progress - The progress bar element.
+ * @param {number} width - The new width of the progress bar in percentage.
+ */
 function updateProgressBarWidth(progress, width) {
     progress.querySelector(":before").style.width = `${width}%`;
 }
 
-
+/**
+ * Handles visibility changes of the document.
+ * Pauses and resumes the progress bar animation and the timers.
+ */
 export function handleVisibilityChange() {
     const progress = document.querySelector(".progress");
 
@@ -49,7 +62,12 @@ export function handleVisibilityChange() {
 }
 
 
-
+/**
+ * Displays a toast message with a progress bar.
+ * @param {boolean} isGood - Determines the color and icon of the toast message. True for success, false for failure.
+ * @param {string} headingText - The text to be displayed as the heading of the toast message.
+ * @param {string} messageText - The text to be displayed as the message body of the toast message.
+ */
 export function showToast(isGood, headingText, messageText) {
     const toast = document.querySelector(".toast");
     const closeIcon = document.querySelector(".close");

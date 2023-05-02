@@ -1,11 +1,26 @@
+/**
+ * Module for managing local storage of drawings.
+ * @module localStorage
+ * @requires module:history
+ * @requires module:toast
+ */
+
 import {getHistoryStack} from './history.js'
 import {showToast} from "./toast.js"
 
+/**
+ * Saves a drawing to local storage with the given name.
+ * @param {string} drawingName - The name for the drawing to be saved.
+ */
 export function saveDrawing(drawingName) {
     localStorage.setItem(drawingName, JSON.stringify(getHistoryStack()))
     showToast(true, 'Success', `Drawing saved as "${drawingName}".`)
 }
 
+/**
+ * Deletes a drawing with the given name from local storage.
+ * @param {string} drawingName - The name of the drawing to be deleted.
+ */
 export function deleteDrawing(drawingName) {
     if (isKeyInLocalStorage(drawingName)){
         localStorage.removeItem(drawingName)
@@ -15,19 +30,21 @@ export function deleteDrawing(drawingName) {
     }
 }
 
+/**
+ * Checks if a key exists in local storage.
+ * @param {string} key - The key to check for in local storage.
+ * @returns {boolean} - Returns true if the key exists, otherwise false.
+ */
 function isKeyInLocalStorage(key) {
     const value = localStorage.getItem(key);
     return value !== null;
 }
 
-export function getDrawingKeys() {
-    const drawingKeys = []
-    for (let i = 0; i < localStorage.length; i++) {
-        drawingKeys.push(localStorage.key(i))
-    }
-    return drawingKeys
-}
-
+/**
+ * Loads a drawing with the given name from local storage.
+ * @param {string} drawingName - The name of the drawing to be loaded.
+ * @returns {Array|null} - Returns the loaded drawing as an array if it exists, otherwise null.
+ */
 export function loadDrawing(drawingName) {
     if (localStorage.getItem(drawingName)) {
         return JSON.parse(localStorage.getItem(drawingName))
@@ -35,6 +52,10 @@ export function loadDrawing(drawingName) {
     return null
 }
 
+/**
+ * Populates a select element with options based on the keys in local storage.
+ * @param {string} selectId - The ID of the select element to populate.
+ */
 export function populateSelectFromLocalStorage(selectId) {
     const select = document.getElementById(selectId)
 
@@ -58,6 +79,10 @@ export function populateSelectFromLocalStorage(selectId) {
     })
 }
 
+/**
+ * Retrieves all keys from local storage.
+ * @returns {Array} - An array of all keys in local storage.
+ */
 function getLocalStorageKeys() {
     const localStorageKeys = [];
 

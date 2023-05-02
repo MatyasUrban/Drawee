@@ -1,3 +1,8 @@
+/**
+ * Main module for a drawing application.
+ * @module main
+ */
+
 import { initPointerEvents } from './script-modules/pointerEvents.js';
 import { undo, redo, pushState, getCurrentState, clearHistory, loadNewHistoryStack} from './script-modules/history.js';
 import { exportSVGtoPNG } from './script-modules/export.js';
@@ -5,11 +10,15 @@ import {saveDrawing, deleteDrawing, loadDrawing, populateSelectFromLocalStorage}
 import {showToast, handleVisibilityChange} from "./script-modules/toast.js";
 import {isInCzechia, translateToCzech} from "./script-modules/localize.js"
 
-
+/**
+ * Initializes the application, adds event listeners, and sets up the initial state.
+ */
 window.onload = async () => {
-
+    // initializes board and stroke preview
     updateStrokePreview()
     initPointerEvents()
+    pushState(getCurrentState())
+    // prevents scrolling on touch devices when interacting with the board
     const svgBoard = document.getElementById('svg-board');
     svgBoard.addEventListener('touchstart', (event) => {
         event.preventDefault();
@@ -22,25 +31,28 @@ window.onload = async () => {
     svgBoard.addEventListener('touchend', (event) => {
         event.preventDefault();
     });
-    pushState(getCurrentState())
+    // updates stroke preview when user changes color or width
     document.getElementById('stroke-color').addEventListener('change', () => {
         updateStrokePreview()
     });
     document.getElementById('stroke-width').addEventListener('change', () => {
         updateStrokePreview()
     });
+    // button to clean the entire board
     document.getElementById('new').addEventListener('click', (event) => {
         event.preventDefault()
         const svg = document.getElementById('svg-board');
         svg.innerHTML = ''
         clearHistory()
     });
+    // sets up the undo and redo buttons
     document.getElementById('undo').addEventListener('click', () => {
         undo()
     });
     document.getElementById('redo').addEventListener('click', () => {
         redo()
     });
+    // sets up forms and their respective opener divs
     const saveDiv = document.getElementById('save')
     const saveForm = document.getElementById('save-form')
     const loadDiv = document.getElementById('load')
@@ -131,11 +143,11 @@ window.onload = async () => {
         deleteDrawing(document.getElementById('saved-drawings-delete-select').value)
         populateSelectFromLocalStorage('saved-drawings-delete-select')
     })
+    // showing and closing the learning video
     document.getElementById('show-video').addEventListener('click', () => {
         if (navigator.onLine) {
             const videoOverlay = document.getElementById('video-overlay');
             videoOverlay.classList.remove('hidden');
-            const video = document.getElementById('show-video');
         } else {
             showToast(false, "You're offline", "Restore your internet connection first")
         }
@@ -145,7 +157,7 @@ window.onload = async () => {
         videoOverlay.classList.add('hidden');
         const video = document.getElementById('show-video');
     });
-
+    // managing online and offline states
     window.addEventListener('offline', () => {
         const videoOverlay = document.getElementById('video-overlay');
         if (!videoOverlay.classList.contains('hidden')) {
@@ -157,9 +169,11 @@ window.onload = async () => {
     window.addEventListener('online', () => {
         showToast(true, "You're online", "Enjoy your stay")
     });
+    //
     document.addEventListener("visibilitychange", () => {
         handleVisibilityChange();
     })
+    // personalized localization
     const inCzechia = await isInCzechia();
     if (inCzechia) {
         translateToCzech()

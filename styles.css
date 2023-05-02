@@ -73,6 +73,9 @@ nav {
     cursor: pointer;
     padding: 0 10px;
     border: 2px solid lightgrey;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
 .wrapper .option .dot{
@@ -92,7 +95,14 @@ nav {
     background: #0069d9;
     border-radius: 50%;
     opacity: 0;
+    -webkit-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    -o-transform: scale(1.5);
     transform: scale(1.5);
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
 input[type="radio"]{
@@ -171,8 +181,8 @@ input[type='submit']{
     background-color: darksalmon;
 }
 
-.bottom-controls-section .fas,
-.upper-controls-section .fas {
+.bottom-controls-section :not(form) > .fas,
+.upper-controls-section :not(form) > .fas {
     color: white;
     margin: 15px;
     font-size: 40px;
@@ -416,7 +426,7 @@ footer {
 }
 
 
-@media (min-width: 720px) {
+@media (min-width: 1024px) {
 
     .drawing-board-container {
         width: 100vh;
